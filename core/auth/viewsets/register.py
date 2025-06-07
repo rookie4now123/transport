@@ -3,10 +3,10 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.permissions import AllowAny
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
-from core.auth.serializers.register import RegisterSerializer
+from core.auth.serializers.register import MonitorUserRegisterSerializer, WebUserRegisterSerializer
 
-class RegisterViewSet(ViewSet):
-    serializer_class = RegisterSerializer
+class WebRegisterViewSet(ViewSet):
+    serializer_class = WebUserRegisterSerializer
     permission_classes = (AllowAny,)
     http_method_names = ['post']
 

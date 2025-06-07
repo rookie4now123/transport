@@ -16,6 +16,13 @@ class UserSerializer(AbstractSerializer):
             "is_active",
             "created",
             "updated",
+            'user_type'
         ]
         
-        read_only_field = ['is_active']
+        read_only_fields = [
+            'id', 
+            'is_active', 
+            'created', 
+            'updated', 
+            'user_type'
+        ]
