@@ -35,7 +35,7 @@ class WebUserLoginSerializer(LoginSerializer):
     def check_user_type(self):
         if self.user.user_type != UserType.WEB:
             raise AuthenticationFailed(
-                detail="Monitor authentication failed.",
+                detail="Authentication failed. This endpoint is for web users only.",
                 code="authentication_failed"
             )
 

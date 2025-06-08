@@ -22,7 +22,6 @@ class MonitorLoginViewSet(ViewSet):
     serializer_class = MonitorUserLoginSerializer # Use the specific serializer
     permission_classes = (AllowAny,)
     http_method_names = ['post']
-
     def create(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         try:
