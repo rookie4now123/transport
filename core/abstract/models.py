@@ -4,10 +4,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 
 class AbstractManager(models.Manager):
-    def get_object_by_public_id(self, public_id):
+    def get_object_by_id(self, pk_id):
         try:
-            instance = self.get(public_id=public_id)
-            return instance
+            return self.get(pk=pk_id)
         except (ObjectDoesNotExist, ValueError, TypeError):
             return Http404
 
@@ -16,7 +15,6 @@ class AbstractModel(models.Model):
                           default=uuid.uuid4, editable=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    
     objects = AbstractManager()
     
     class Meta:

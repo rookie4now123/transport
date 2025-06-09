@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import MonitorUser, User
+from .models import User
 from core.abstract.serializers import AbstractSerializer
 
 class UserSerializer(AbstractSerializer):
@@ -20,12 +20,3 @@ class UserSerializer(AbstractSerializer):
             #'is_active',
             'user_type',
         ]
-class MonitorSerializer(UserSerializer):
-    class Meta:
-        model = MonitorUser # Target the correct model
-        
-        fields = UserSerializer.Meta.fields + ['device_id']
-        
-        # We can also extend the read_only_fields if needed
-        #read_only_fields = UserSerializer.Meta.read_only_fields + ['device_id']
-        
