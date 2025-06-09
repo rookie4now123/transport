@@ -36,7 +36,7 @@ class MonitorUserViewSet(AbstractViewSet):
 
     def get_object(self):
         # Fetch from the main User model using the public_id
-        obj = User.objects.get_object_by_public_id(self.kwargs['pk'])
+        obj = User.objects.get_object_by_id(self.kwargs['pk'])
         self.check_object_permissions(self.request, obj)
         return obj
 
