@@ -20,7 +20,6 @@ class UserViewSet(AbstractViewSet):
         return obj
 
 class MonitorUserViewSet(AbstractViewSet):
-
     permission_classes = (IsAuthenticated, IsWebUser)
     http_method_names = ('get', 'post', 'patch', 'delete')
     def get_queryset(self):

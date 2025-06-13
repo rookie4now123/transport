@@ -1,8 +1,5 @@
-import uuid
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
-from django.http import Http404
 from core.abstract.models import AbstractModel, AbstractManager
 
 class UserType(models.TextChoices):
@@ -15,7 +12,7 @@ class UserManager(BaseUserManager, AbstractManager):
         if username is None:
             raise TypeError('Users must have a username.')
         if password is None:
-            raise TypeError('User must have an email.')
+            raise TypeError('User must have an password.')
         if email:
             email = self.normalize_email(email)
         else:
@@ -43,7 +40,7 @@ class UserManager(BaseUserManager, AbstractManager):
         if username is None:
             raise TypeError('Superusers must have an username.')
 
-        user = self.acreate_user(username, email, password, **kwargs)
+        user = self.acreate_user(username, password, email, **kwargs)
         user.save(using=self._db)
         return user
     

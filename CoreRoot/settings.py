@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 from datetime import timedelta
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,10 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'django.contrib.gis',
+    'django_filters',
     'rest_framework',
     'rest_framework_simplejwt',
-
+    'station',
     'core',
     'core.user',
     'core.auth',
@@ -58,7 +60,7 @@ MIDDLEWARE = [
 
 AUTH_USER_MODEL = 'user.user'
 ROOT_URLCONF = 'CoreRoot.urls'
-
+GDAL_LIBRARY_PATH = "d:\\OSGeo4W\\bin\\gdal310.dll"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -82,12 +84,12 @@ WSGI_APPLICATION = 'CoreRoot.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'coredb',
-        'USER': 'root',
-        'PASSWORD': 'qwerty',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'transport',
+        'USER': 'postgres',
+        'PASSWORD': 'qwerty123456',
         'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'PORT': '5432',
     }
 }
 

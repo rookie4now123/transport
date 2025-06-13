@@ -8,7 +8,7 @@ class AbstractManager(models.Manager):
         try:
             return self.get(pk=pk_id)
         except (ObjectDoesNotExist, ValueError, TypeError):
-            return Http404
+            raise Http404("Object not found")
 
 class AbstractModel(models.Model):
     id = models.UUIDField(db_index=True, unique=True, primary_key=True,
