@@ -42,10 +42,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'station',
+    'route',
     'core',
+    'tracking',
     'core.user',
     'core.auth',
-
 ]
 
 MIDDLEWARE = [
@@ -147,3 +148,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SRID_WGS84 = 4326

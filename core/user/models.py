@@ -50,7 +50,6 @@ class User(AbstractModel, AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=255)
     email = models.EmailField(db_index=True, unique=True, null = True)
     user_type = models.CharField(max_length=50, choices=UserType.choices)
-    is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ['user_type']

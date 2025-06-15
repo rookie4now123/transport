@@ -13,6 +13,7 @@ class AbstractManager(models.Manager):
 class AbstractModel(models.Model):
     id = models.UUIDField(db_index=True, unique=True, primary_key=True,
                           default=uuid.uuid4, editable=False)
+    is_active = models.BooleanField(default=True, db_index=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     objects = AbstractManager()

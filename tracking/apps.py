@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class RouteConfig(AppConfig):
+class TrackingConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'route'
-    label = 'route'
+    name = 'tracking'
+    label = 'tracking'
