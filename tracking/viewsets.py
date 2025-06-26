@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions, mixins
+from rest_framework import viewsets, mixins
 from .models import RouteRun, LocationPoint
 from .serializers import RouteRunSerializer, LocationPointSerializer
 from rest_framework.permissions import IsAuthenticated
@@ -13,7 +13,7 @@ class MobileRouteRunViewSet(mixins.CreateModelMixin,
     """
     queryset = RouteRun.objects.all()
     serializer_class = RouteRunSerializer
-    permission_classes = [IsMonitorUser]
+    permission_classes = [IsAuthenticated, IsMonitorUser]
 
     def perform_create(self, serializer):
         # Automatically set the monitor to the logged-in user

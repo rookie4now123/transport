@@ -6,6 +6,7 @@ from .auth.viewsets import (
     WebLoginViewSet,
     MonitorLoginViewSet,
     WebRegisterViewSet,
+    RefreshViewSet
 )
 from tracking.viewsets import(
     MobileRouteRunViewSet,
@@ -13,6 +14,7 @@ from tracking.viewsets import(
     WebRouteRunViewSet,
     WebLocationPointViewSet
 )
+from student.viewsets import StudentViewSet
 router = routers.SimpleRouter()
 # ############################################################
 ######### #
@@ -24,6 +26,8 @@ router.register(r'user', UserViewSet, basename='user')
 router.register(r'monitors', MonitorUserViewSet, basename='monitor-user')
 router.register(r'station', StationViewSet, basename='station')
 router.register(r'route', RouteViewSet, basename='route')
+router.register(r'student', StudentViewSet, basename='student')
+
 
 router.register(r'routeruns', MobileRouteRunViewSet, basename='mobile-routerun')
 router.register(r'locationpoints', MobileLocationPointViewSet, basename='mobile-locationpoint')
@@ -34,7 +38,7 @@ router.register(r'locationpoints', WebLocationPointViewSet, basename='web-locati
 router.register(r'auth/register', WebRegisterViewSet, basename='web-register')
 router.register(r'auth/login', WebLoginViewSet, basename='web-login')
 router.register(r'auth/monitor_login', MonitorLoginViewSet, basename='mobile-login')
-
+router.register(r'auth/refresh', RefreshViewSet, basename='auth-refresh')
 urlpatterns = [
 *router.urls,
 ]
