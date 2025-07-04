@@ -21,15 +21,14 @@ class RouteRun(AbstractModel):
         on_delete=models.PROTECT,
         limit_choices_to={'user_type': 'MONITOR'}
     )
-    start_time = models.DateTimeField(auto_now_add=True)
     end_time = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='IN_PROGRESS')
 
     class Meta:
-        ordering = ['-start_time']
+        ordering = ['-created']
 
     def __str__(self):
-        return f"{self.route.route_name} run by {self.monitor.username} at {self.start_time.strftime('%Y-%m-%d %H:%M')}"
+        return f"{self.route.route_name} run by {self.monitor.username} at {self.created.strftime('%Y-%m-%d %H:%M')}"
 
 class LocationPoint(AbstractModel):
     """

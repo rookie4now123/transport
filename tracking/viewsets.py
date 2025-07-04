@@ -3,6 +3,9 @@ from .models import RouteRun, LocationPoint
 from .serializers import RouteRunSerializer, LocationPointSerializer
 from rest_framework.permissions import IsAuthenticated
 from core.auth.permissions import IsWebUser, IsMonitorUser
+from .filter import LocationPointFilter
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 class MobileRouteRunViewSet(mixins.CreateModelMixin,
                              mixins.UpdateModelMixin, # For PATCH to end the run
@@ -44,12 +47,10 @@ class WebLocationPointViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     serializer_class = LocationPointSerializer
     permission_classes = [IsWebUser]
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = LocationPointFilter
 
     def get_queryset(self):
         # Allow filtering by run_id in the URL query params
         # e.g., /api/web/locationpoints/?run=...
-        queryset = LocationPoint.objects.all()
-        run_id = self.request.query_params.get('run')
-        if run_id:
-            return queryset.filter(run_id=run_id)
-        return queryset
+        return LocationPoint.objects.select_related('run', 'run__route').all()
