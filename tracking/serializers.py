@@ -27,6 +27,7 @@ class RouteRunSerializer(serializers.ModelSerializer):
 
 class LocationPointSerializer(serializers.ModelSerializer):
     # Keep latitude and longitude as write-only fields for input
+    
     latitude = serializers.FloatField(write_only=True)
     longitude = serializers.FloatField(write_only=True)
     route_name = serializers.CharField(source='run__route__route_name', read_only=True)
@@ -35,6 +36,17 @@ class LocationPointSerializer(serializers.ModelSerializer):
         # 'location' will be used for reading, lat/lon for writing
         fields = ['id', 'run', 'location', 'latitude', 'longitude', 'timestamp', 'route_name']
         read_only_fields = ['timestamp', 'location']
+    
+    def to_representation(self, instance):
+        # Start with the default representation
+        data = super().to_representation(instance)
+        # Now, reformat the 'location' field
+        if instance.location:
+            data['location'] = {
+                'latitude': instance.location.y,
+                'longitude': instance.location.x
+            }
+        return data
 
     def create(self, validated_data):
         # Extract lat/lon from the validated data
@@ -43,5 +55,4 @@ class LocationPointSerializer(serializers.ModelSerializer):
 
         # Create a Point object (longitude, latitude)
         validated_data['location'] = Point(lon, lat, srid=settings.SRID_WGS84)
-
         return super().create(validated_data)
