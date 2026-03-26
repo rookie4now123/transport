@@ -66,7 +66,7 @@ MIDDLEWARE = [
 
 AUTH_USER_MODEL = 'user.user'
 ROOT_URLCONF = 'CoreRoot.urls'
-GDAL_LIBRARY_PATH = "d:\\OSGeo4W\\bin\\gdal310.dll"
+#GDAL_LIBRARY_PATH = "d:\\OSGeo4W\\bin\\gdal310.dll"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -91,11 +91,11 @@ ASGI_APPLICATION = 'CoreRoot.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'transport',
-        'USER': 'postgres',
-        'PASSWORD': 'qwerty123456',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': os.environ.get('DB_NAME', 'transport'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'qwerty123456'),
+        'HOST': os.environ.get('DB_HOST', 'db'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
