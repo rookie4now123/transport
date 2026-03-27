@@ -29,19 +29,24 @@ class UserManager(BaseUserManager, AbstractManager):
         user.save(using=self._db)
         return user
     
-    def acreate_superuser(self, username, password , email = None,
-                           **kwargs):
+    def acreate_superuser(self, username, password, email=None, **kwargs):
         """
-        Create and return a `User` with superuser (admin)
-        permissions.
+        Create and return a `User` with superuser (admin) permissions.
         """
         if password is None:
             raise TypeError('Superusers must have a password.')
         if username is None:
-            raise TypeError('Superusers must have an username.')
+            raise TypeError('Superusers must have a username.')
 
-        user = self.acreate_user(username, password, email, **kwargs)
-        user.save(using=self._db)
+        kwargs.setdefault('is_superuser', True)
+        
+        user = self.acreate_user(
+            username=username, 
+            password=password, 
+            email=email, 
+            user_type=UserType.WEB, 
+            **kwargs
+        )
         return user
     
 class User(AbstractModel, AbstractBaseUser, PermissionsMixin):

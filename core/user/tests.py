@@ -18,3 +18,13 @@ def test_create_user():
     assert user.first_name == data_user["first_name"]
     assert user.last_name == data_user["last_name"]
     assert user.user_type == data_user["user_type"]
+
+@pytest.mark.django_db
+def test_create_superuser():
+    user = User.objects.acreate_superuser(
+        username="admin",
+        password="adminpassword",
+        email="admin@example.com"
+    )
+    assert user.username == "admin"
+    assert user.is_superuser is True
