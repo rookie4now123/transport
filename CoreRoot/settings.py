@@ -115,12 +115,12 @@ REST_FRAMEWORK = {
 
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        #'BACKEND': 'channels.layers.InMemoryChannelLayer',
         #this config is for production only#
-        #'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        # 'CONFIG': {
-        #     "hosts": [('127.0.0.1', 6379)], # Your Redis server address
-        # },
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('redis', 6379)], # Your Redis server address
+        },
     },
 }
 # Password validation

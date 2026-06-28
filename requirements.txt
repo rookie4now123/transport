@@ -9,3 +9,5 @@ daphne
 channels
 setuptools
 #gdal
+python-dotenv
+channels-redis
